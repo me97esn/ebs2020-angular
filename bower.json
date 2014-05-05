@@ -1,0 +1,26 @@
+{
+  "name": "ebs2020-angular",
+  "version": "0.0.0",
+  "dependencies": {
+    "angular": "1.2.6",
+    "json3": "~3.2.6",
+    "es5-shim": "~2.1.0",
+    "jquery": "~1.10.2",
+    "sass-bootstrap": "~3.0.2",
+    "angular-resource": "1.2.6",
+    "angular-cookies": "1.2.6",
+    "angular-sanitize": "1.2.6",
+    "angular-route": "1.2.6",
+    "backbone.courier": "~0.5.7",
+    "backbone-associations": "^0.6",
+    "backbone-forms": "~0.14.0",
+    "backbone.bootstrap-modal": "~0.9.0",
+    "Backbone.ModelBinder": "~1.0.5",
+    "backbone.iobind": "~0.4.6",
+    "backbone.marionette": "~1"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.6",
+    "angular-scenario": "1.2.6"
+  }
+}
