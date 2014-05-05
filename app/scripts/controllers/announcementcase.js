@@ -100,10 +100,10 @@ angular.module('ebs2020AngularApp')
 				}
 			}
 
-			$(':input:not(:checkbox):not(:radio):not(select)').on('blur', submitForm);
-			$(':checkbox').on('click', submitForm);
-			$(':radio').on('click', submitForm);
-			$('select').on('change', submitForm);
+			$('main :input:not(:checkbox):not(:radio):not(select)').on('blur', submitForm);
+			$('main :checkbox').on('click', submitForm);
+			$('main :radio').on('click', submitForm);
+			$('main select').on('change', submitForm);
 		}
 
 
