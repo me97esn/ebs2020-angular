@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('ebs2020AngularApp')
-  .service('Restapi', function Restapi() {
+  .service('Restapi', function Restapi(Settings) {
+  	var settings = Settings;
   	this.BaseModel = Backbone.AssociatedModel.extend({
             /******
             * Note, do not override this method unless you're absolutely certain about what you're doing!
@@ -30,10 +31,11 @@ angular.module('ebs2020AngularApp')
 
                 this.idAttribute = 'id';
                 this.revAttribute = '_rev';
+                console.log('TODO: add ioBind to model!');
 
-                this.ioBind('serverdelete', conosleIo.socketio, this.doTheFetch);
-                this.ioBind('servercreate', conosleIo.socketio, this.doTheFetch);
-                this.ioBind('serverupdate', conosleIo.socketio, this.doTheFetch);
+                // this.ioBind('serverdelete', conosleIo.socketio, this.doTheFetch);
+                // this.ioBind('servercreate', conosleIo.socketio, this.doTheFetch);
+                // this.ioBind('serverupdate', conosleIo.socketio, this.doTheFetch);
 
                 if (attributes) {
                     this.id = attributes[this.idAttribute] || attributes.id || attributes._id; // We always want to use 'id' as our it attribute
@@ -54,5 +56,17 @@ angular.module('ebs2020AngularApp')
                 });
             }
         });
+
+  	this.DataModel = this.BaseModel.extend({
+        url: function () {
+            if (this.id) {
+                return settings.getRestUrl('EntityREST/' + (this.module || this.get('module')) + '/' + this.id);
+                //return settings.getRestUrl('EntityREST/AnnouncementCase/' + this.announcementId + '/' + this.module + '/' + this.id);
+            }
+            else {
+                return settings.getRestUrl('EntityREST/' + (this.module || this.get('module')));
+            }
+        }
+    });
     // AngularJS will instantiate a singleton by calling "new" on this function
   });
