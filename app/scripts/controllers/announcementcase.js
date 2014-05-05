@@ -3,15 +3,21 @@
 angular.module('ebs2020AngularApp')
 	.controller('AnnouncementcaseCtrl', function($scope, Restapi, Settings, Formeditors) {
 		console.log('TODO: Read id from url, here is hard coded');
-		var caseid = 24461;
+		
+		// TODO: Should be AnnouncementGeneralSection!
+		// https://127.0.0.1:4000/restapi/EntityREST/AnnouncementGeneralSection/17576
+		https://localhost:4000/#AnnouncementCase/24461/caseSections/24464/AnnouncementGeneralSection
+		var sectionid = 24464;
 		$scope.announcementCase = new Restapi.DataModel({
-			id: caseid,
-			module: 'AnnouncementCase'
+			id: sectionid,
+			module: 'AnnouncementGeneralSection'
 		});
-		$scope.announcementCase.fetch();
+		$scope.announcementCase.fetch({success:function(){
+			$scope.displaySchemas
+		}});
 
 		$scope.schemaModel = new Restapi.SchemaModel({
-			id: caseid,
+			id: sectionid,
 			module: 'AnnouncementGeneralSection',
 			valueTwo: Settings.applicationName
 		})
@@ -83,6 +89,21 @@ angular.module('ebs2020AngularApp')
 			form.render()
 			console.log('rendered form: ', form.el);
 			$('body').append(form.el);
+
+			function submitForm() {
+				console.log('Submitting form...');
+				var errors = form.commit();
+				if (!errors) {
+					form.model.changedAttributes() && form.model.save();
+				} else {
+					console.warn('Errors:' + JSON.stringify(errors));
+				}
+			}
+
+			$(':input:not(:checkbox):not(:radio):not(select)').on('blur', submitForm);
+			$(':checkbox').on('click', submitForm);
+			$(':radio').on('click', submitForm);
+			$('select').on('change', submitForm);
 		}
 
 
@@ -99,6 +120,7 @@ angular.module('ebs2020AngularApp')
 			});
 
 			function submitForm() {
+				console.log('Submitting form...');
 				var errors = form.commit();
 				if (!errors) {
 					form.model.changedAttributes() && form.model.save();
@@ -116,10 +138,10 @@ angular.module('ebs2020AngularApp')
 			that.addRegion(newRegion, '#' + newRegion);
 			that[newRegion].show(form);
 
-			$('main :input:not(:checkbox):not(:radio):not(select)').on('blur', submitForm);
-			$('main :checkbox').on('click', submitForm);
-			$('main :radio').on('click', submitForm);
-			$('main select').on('change', submitForm);
+			$(':input:not(:checkbox):not(:radio):not(select)').on('blur', submitForm);
+			$(':checkbox').on('click', submitForm);
+			$(':radio').on('click', submitForm);
+			$('select').on('change', submitForm);
 		}
 
 

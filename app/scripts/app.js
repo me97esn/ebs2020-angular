@@ -9,8 +9,8 @@ angular.module('ebs2020AngularApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/announcementcase.html',
+        controller: 'AnnouncementcaseCtrl'
       })
       .when('/AnnouncementCase', {
         templateUrl: 'views/announcementcase.html',
