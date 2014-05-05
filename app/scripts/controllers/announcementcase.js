@@ -75,16 +75,14 @@ angular.module('ebs2020AngularApp')
 			var schemaJson = schema;
 
 			console.log('Displaying schema :', schemaJson.schema);
+
 			var form = new Backbone.Form({
 				model: $scope.announcementCase,
 				schema: schemaJson.schema
 			});
-			try{form.render()
-						console.log('rendered form: ', form.el);
-						$('body').append(form.el);}catch(e){
-							console.log('TODO: remove try/catch again"');
-							console.log(e);
-						}
+			form.render()
+			console.log('rendered form: ', form.el);
+			$('body').append(form.el);
 		}
 
 
