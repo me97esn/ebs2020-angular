@@ -1,0 +1,31 @@
+﻿@import "../esf.less";
+
+@font-family-base: 'Comic Sans MS';
+
+@body-bg: #000;
+@text-color: #0f0;
+
+@brand-primary: #0f0;
+@brand-success: #0f0;
+@brand-warning: #0f0;
+@brand-danger: #0f0;
+@brand-info: #0f0;
+
+* {
+    background-color: @body-bg;
+    border: 0;
+    color: @text-color;
+
+    * {
+        background-color: @body-bg;
+    }
+
+    a {
+        color: @text-color;
+        background-color: @body-bg;
+    }
+}
+
+header {
+    padding: 0 !important;
+}

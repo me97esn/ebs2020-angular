@@ -7,11 +7,11 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
-
+  require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
@@ -24,7 +24,23 @@ module.exports = function (grunt) {
       app: require('./bower.json').appPath || 'app',
       dist: 'dist'
     },
-
+    less: {
+      server: {
+        options: {
+          paths: ['<%= yeoman.app %>/styles'],
+          compress: true,
+          report: 'min',
+          tasks: ['less:server']
+        },
+        files: {
+          '.tmp/styles/esf.css': '<%= yeoman.app %>/styles/esf/themes/esf.less',
+          '.tmp/styles/esf-design.css': '<%= yeoman.app %>/styles/esf/themes/esf-design.less',
+          '.tmp/styles/esf-dark.css': '<%= yeoman.app %>/styles/esf/themes/esf-dark.less',
+          '.tmp/styles/esf-old.css': '<%= yeoman.app %>/styles/esf/themes/esf-old.less',
+          '.tmp/styles/esf-summer.css': '<%= yeoman.app %>/styles/esf/themes/esf-summer.less'
+        }
+      }
+    },
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       js: {
@@ -33,6 +49,10 @@ module.exports = function (grunt) {
         options: {
           livereload: true
         }
+      },
+      less: {
+        files: ['<%= yeoman.app %>/styles/esf/esf.less'],
+        tasks: ['less:server']
       },
       jsTest: {
         files: ['test/spec/{,*/}*.js'],
@@ -146,7 +166,6 @@ module.exports = function (grunt) {
         ignorePath: '<%= yeoman.app %>/'
       }
     },
-
 
 
 
@@ -353,7 +372,7 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('serve', function (target) {
+  grunt.registerTask('serve', function(target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
@@ -362,13 +381,14 @@ module.exports = function (grunt) {
       'clean:server',
       'bower-install',
       'concurrent:server',
+      'less:server',
       'autoprefixer',
       'connect:livereload',
       'watch'
     ]);
   });
 
-  grunt.registerTask('server', function () {
+  grunt.registerTask('server', function() {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve']);
   });
@@ -384,6 +404,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'bower-install',
+    
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -391,6 +412,7 @@ module.exports = function (grunt) {
     'ngmin',
     'copy:dist',
     'cdnify',
+    'less:server',
     'cssmin',
     'uglify',
     'rev',

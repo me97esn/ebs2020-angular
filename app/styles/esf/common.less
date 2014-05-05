@@ -1,0 +1,192 @@
+﻿@import "../../bower_components/bootstrap/less/variables.less";
+@import "fonts/helveticaneue.less";
+
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+body {
+    //background-color: lighten(#428bca, 30%);
+    /*background-color: @navbar-inverse-bg;*/
+    font-family: HelveticaNeue, Helvetica, Arial;
+    font-size: 13px;
+    margin-top: 56px;
+}
+
+a {
+    cursor: pointer;
+}
+
+label {
+    font-family: HelveticaNeue, Helvetica, Arial;
+    font-size: 13px;
+}
+
+label[for] {
+    cursor: pointer;
+}
+
+hr {
+    margin: 10px;
+}
+
+.clearfixempty {
+    .clearfix;
+    line-height: 0;
+}
+
+#content {
+    background-color: #fff;
+}
+
+.modal-body {
+    padding-bottom: 0 !important;
+
+    form.form-horizontal {
+        fieldset {
+            -moz-column-count: 2;
+            -webkit-column-count: 2;
+            column-count: 2;
+            -moz-column-gap: 30px;
+            -webkit-column-gap: 30px;
+            column-gap: 30px;
+            -moz-column-rule: 1px solid #eee;
+            -webkit-column-rule: 1px solid #eee;
+            column-rule: 1px solid #eee;
+
+            & > div {
+                margin: 0 !important;
+                -webkit-column-break-inside: avoid;
+                column-break-inside: avoid;
+            }
+        }
+    }
+}
+
+form.form-horizontal {
+    fieldset > div {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+}
+
+ul.form-control {
+    border: 0;
+    -webkit-box-shadow: 0 0 0 !important;
+    box-shadow: 0 0 0 !important;
+    height: auto;
+    list-style-type: none;
+
+    li {
+        label {
+            margin-left: 5px;
+        }
+    }
+}
+
+:-webkit-full-screen {
+    height: 100%;
+    overflow: auto;
+    padding: 15px;
+    width: 100%;
+}
+
+:-moz-full-screen {
+    background-color: #fff;
+    height: 100%;
+    overflow: auto;
+    padding: 15px;
+    width: 100%;
+}
+
+:-ms-fullscreen {
+    height: 100%;
+    overflow: auto;
+    padding: 15px !important;
+    width: 100%;
+}
+
+:fullscreen {
+    height: 100%;
+    overflow: auto;
+    padding: 15px;
+    width: 100%;
+}
+
+// Webkit hack for search box
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@media (max-width: 992px) {
+    body {
+        background-color: #fff;
+    }
+}
+
+@-moz-keyframes LoopItem {
+    from {
+        -webkit-transform: perspective(600px) rotateY(0deg) rotateX(0deg);
+        /*-webkit-transform: rotate(0deg);*/
+    }
+
+    to {
+        /*-webkit-transform: rotate(-360deg);*/
+        -webkit-transform: perspective(600px) rotateY(359deg) rotateX(359deg);
+    }
+}
+
+@-webkit-keyframes LoopItem {
+    from {
+        -webkit-transform: perspective(600px) rotateY(0deg) rotateX(0deg);
+        /*-webkit-transform: rotate(0deg);*/
+    }
+
+    to {
+        /*-webkit-transform: rotate(-360deg);*/
+        -webkit-transform: perspective(600px) rotateY(359deg) rotateX(359deg);
+    }
+}
+
+@keyframes LoopItem {
+    from {
+        -webkit-transform: perspective(600px) rotateY(0deg) rotateX(0deg);
+        /*-webkit-transform: rotate(0deg);*/
+    }
+
+    to {
+        /*-webkit-transform: rotate(-360deg);*/
+        -webkit-transform: perspective(600px) rotateY(359deg) rotateX(359deg);
+    }
+}
+
+.loop {
+    -moz-animation-duration: 5s;
+    -o-animation-duration: 5s;
+    -webkit-animation-duration: 5s;
+    animation-duration: 5s;
+    -moz-animation-name: LoopItem;
+    -o-animation-name: LoopItem;
+    -webkit-animation-name: LoopItem;
+    animation-name: LoopItem;
+    -moz-animation-play-state: running;
+    -o-animation-play-state: running;
+    -webkit-animation-play-state: running;
+    animation-play-state: running;
+    -moz-animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+    -o-animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+}
+
+// Uncomment this to get visual information about real-time changes in CSS properties
+/** {
+    transition: all linear 0.5s;
+}*/

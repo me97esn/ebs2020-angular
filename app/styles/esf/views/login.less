@@ -1,0 +1,49 @@
+﻿@import "../../../bower_components/bootstrap/less/variables.less";
+
+.view-login {
+    background-color: @brand-primary;
+
+    & > div {
+        margin: 0 auto;
+        float: none;
+    }
+
+    aside {
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-top: 0px;
+    }
+
+    .container {
+        @box-shadow-color: darken(@brand-primary, 15%);
+
+        background-color: #fff;
+        box-shadow: @box-shadow-color 0px 0px 5px 5px;
+        padding: 15px 0 15px 0;
+    }
+
+        .container > div.col-lg-8 > p {
+            margin-top: 15px;
+        }
+
+    form {
+        margin: 0 auto;
+        padding-bottom: 15px;
+
+        input {
+            margin-bottom: 15px;
+        }
+    }
+
+    @media (max-width: @screen-desktop) {
+        & {
+            margin-top: 0;
+        }
+
+            & > .col-lg-8 {
+                padding: 0;
+            }
+    }
+}

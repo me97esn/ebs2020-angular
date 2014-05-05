@@ -1,0 +1,177 @@
+﻿.view-layout {
+    background-color: @ebs-form-menu-bg;
+
+    & > div:not(.clearfix) {
+        @media (min-width: 990px) {
+            padding-top: 24px;
+        }
+
+        @media (max-width: 989px) {
+            padding-top: 1px;
+        }
+    }
+
+    .view-form-main {
+        background-color: @body-bg;
+    }
+
+    main {
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+
+        label {
+            font-weight: normal;
+        }
+
+        div {
+            & > fieldset {
+                background-color: @ebs-form-panel-bg;
+                border: 1px solid #ccc;
+                border-radius: 2px;
+
+                fieldset {
+                    fieldset {
+                        fieldset {
+                            fieldset {
+                                & > legend {
+                                    font-size: inherit;
+                                    margin-bottom: 0;
+                                    padding-bottom: 0;
+                                    padding-top: 0;
+                                }
+
+                                div {
+                                    div {
+                                        padding: 0 10px 10px 10px !important;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                & > legend {
+                    font-family: HelveticaNeueMedium, Helvetica, Arial;
+                    font-size: 15px;
+                }
+
+                legend {
+                    border: 0;
+                    margin: 9px;
+                    padding: 9px;
+                    width: inherit;
+                }
+
+                div.form-group {
+                    padding: 0 10px;
+
+                    & > label {
+                        font-weight: normal;
+                        margin: 0;
+                        padding: 0;
+                        text-align: left !important;
+                    }
+
+                    div {
+                        margin: 0;
+                        padding: 0;
+                    }
+                }
+            }
+
+            input, select, textarea {
+                color: #a7a7a7;
+            }
+
+            input[type="checkbox"] {
+                margin-left: 0;
+            }
+
+            .panel-body {
+                padding-top: 0;
+            }
+        }
+
+        ul {
+            background-color: transparent;
+        }
+
+        #view-form-shema-container {
+            -moz-column-count: 2;
+            -webkit-column-count: 2;
+            column-count: 2;
+            -moz-column-gap: 30px;
+            -webkit-column-gap: 30px;
+            column-gap: 30px;
+
+            & > div {
+                -webkit-column-break-inside: avoid;
+                column-break-inside: avoid;
+            }
+
+            table {
+                margin-bottom: 0;
+            }
+        }
+
+        @media (max-width: @screen-desktop) {
+            #view-form-shema-container {
+                -moz-column-count: 1;
+                -webkit-column-count: 1;
+                column-count: 1;
+            }
+        }
+
+        @media (min-width: 1500px) {
+            #view-form-shema-container {
+                -moz-column-count: 3;
+                -webkit-column-count: 3;
+                column-count: 3;
+            }
+        }
+    }
+
+    #view-layout-header-region {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 15px;
+        //margin-top: -10px;
+        padding-left: 15px;
+        padding-top: 5px;
+
+        h1 {
+            color: @ebs-form-header-color;
+            font-family: HelveticaNeueLight, Helvetica, Arial;
+            font-size: 26px;
+            margin: 0;
+            float: left;
+        }
+
+        #view-project-header {
+            padding-top: 10px;
+        }
+
+        ul {
+            -moz-column-width: 30rem;
+            -webkit-column-width: 30rem;
+            column-width: 30rem;
+            list-style-type: none;
+            margin-left: 0;
+            padding: 0;
+
+            li {
+                span:first-child {
+                    font-weight: bold;
+                    width: 150px;
+                }
+            }
+        }
+
+        button {
+            float: left;
+            line-height: 20px;
+            margin-left: 10px;
+            margin-top: 7px;
+            width: 24px;
+        }
+    }
+}
