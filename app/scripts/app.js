@@ -9,12 +9,16 @@ angular.module('ebs2020AngularApp', [
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/announcementcase.html',
-        controller: 'AnnouncementcaseCtrl'
+        templateUrl: 'views/listcases.html',
+        controller: 'ListcasesCtrl'
       })
       .when('/AnnouncementCase', {
         templateUrl: 'views/announcementcase.html',
         controller: 'AnnouncementcaseCtrl'
+      })
+      .when('/listCases', {
+        templateUrl: 'views/listcases.html',
+        controller: 'ListcasesCtrl'
       })
       .otherwise({
         redirectTo: '/'
