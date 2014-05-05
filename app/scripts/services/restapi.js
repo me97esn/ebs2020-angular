@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('ebs2020AngularApp')
-	.service('Restapi', function Restapi(Settings) {
+	.service('Restapi', function Restapi(Settings, $resource) {
+
 		var settings = Settings;
+
+		this.listAnnouncementCases = $resource('/restapi/EntityREST/AnnouncementCase?query=FindAcCaseidName');
+
 		this.BaseModel = Backbone.AssociatedModel.extend({
 			/******
 			 * Note, do not override this method unless you're absolutely certain about what you're doing!
