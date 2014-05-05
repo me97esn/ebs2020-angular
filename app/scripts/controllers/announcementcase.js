@@ -88,7 +88,7 @@ angular.module('ebs2020AngularApp')
 			});
 			form.render()
 			console.log('rendered form: ', form.el);
-			$('body').append(form.el);
+			$('#form-region').append(form.el);
 
 			function submitForm() {
 				console.log('Submitting form...');
