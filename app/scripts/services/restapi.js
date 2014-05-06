@@ -1,11 +1,31 @@
 'use strict';
 
 angular.module('ebs2020AngularApp')
-	.service('Restapi', function Restapi(Settings, $resource) {
-
+	.service('Restapi', function Restapi(Settings, $resource, $rootScope) {
+		var self = this;
 		var settings = Settings;
 
 		this.listAnnouncementCases = $resource('/restapi/EntityREST/AnnouncementCase?query=FindAcCaseidName');
+
+		
+			var socket = io.connect('//localhost:4000');
+
+			socket.on('connect', function() {
+				// socket connected
+			});
+
+			socket.on('custom event', function() {
+				// server emitted a custom event
+			});
+
+			socket.on('disconnect', function() {
+				// socket disconnected
+			});
+
+			socket.send('hi there :)');
+
+			this._socketio = socket;
+		
 
 		this.BaseModel = Backbone.AssociatedModel.extend({
 			/******
@@ -37,9 +57,9 @@ angular.module('ebs2020AngularApp')
 				this.revAttribute = '_rev';
 				console.log('TODO: add ioBind to model!');
 
-				// this.ioBind('serverdelete', conosleIo.socketio, this.doTheFetch);
-				// this.ioBind('servercreate', conosleIo.socketio, this.doTheFetch);
-				// this.ioBind('serverupdate', conosleIo.socketio, this.doTheFetch);
+				// this.ioBind('serverdelete', self._socketio, this.doTheFetch);
+				// this.ioBind('servercreate', self._socketio, this.doTheFetch);
+				// this.ioBind('serverupdate', self._socketio, this.doTheFetch);
 
 				if (attributes) {
 					this.id = attributes[this.idAttribute] || attributes.id || attributes._id; // We always want to use 'id' as our it attribute
@@ -51,11 +71,13 @@ angular.module('ebs2020AngularApp')
 			},
 
 			doTheFetch: function() {
-				console.log('do the fetch ♫♪♩♫♬');
+				console.log('♫♪♩♫♬ do the fetch ♫♪♩♫♬');
 				this.fetch({
 					reset: true,
 					success: function() {
 						console.debug('SocketIO - Model - Fetched: ', this);
+						$rootScope.$digest();
+						this.fetched = new Date();
 					}.bind(this)
 				});
 			}

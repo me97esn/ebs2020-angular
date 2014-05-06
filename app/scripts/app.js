@@ -12,7 +12,7 @@ angular.module('ebs2020AngularApp', [
         templateUrl: 'views/listcases.html',
         controller: 'ListcasesCtrl'
       })
-      .when('/AnnouncementCase', {
+      .when('/AnnouncementCase/:caseId', {
         templateUrl: 'views/announcementcase.html',
         controller: 'AnnouncementcaseCtrl'
       })

@@ -11,12 +11,42 @@ module.exports = function(grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
+
+  grunt.loadNpmTasks('grunt-sweet.js');
   require('matchdep').filterAll('grunt-*').forEach(grunt.loadNpmTasks);
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+
+    sweetjs: {
+      options: {
+        sourceMap: false,
+        sourceRoot: '',
+        readableNames: true,
+        modules: []
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/scripts',
+          src: '{,*/}*.sjs',
+          dest: '.tmp/scripts',
+          ext: '.js'
+        }]
+      },
+      test: {
+        files: [{
+          expand: true,
+          cwd: 'test/spec',
+          src: '{,*/}*.sjs',
+          dest: '.tmp/spec',
+          ext: '.js'
+        }]
+      }
+    },
 
     // Project settings
     yeoman: {
@@ -43,6 +73,12 @@ module.exports = function(grunt) {
     },
     // Watches files for changes and runs tasks based on the changed files
     watch: {
+
+
+      sweetjs: {
+        files: ['<%= yeoman.app %>/scripts/**/*.sjs'],
+        tasks: ['sweetjs']
+      },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
         tasks: ['newer:jshint:all'],
@@ -324,6 +360,8 @@ module.exports = function(grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+
+        'sweetjs',
         'compass:server'
       ],
       test: [

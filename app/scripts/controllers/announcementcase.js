@@ -1,48 +1,56 @@
 'use strict';
 
 angular.module('ebs2020AngularApp')
-	.controller('AnnouncementcaseCtrl', function($scope, Restapi, Settings, Formeditors) {
-		console.log('TODO: Read id from url, here is hard coded');
-		
-		// TODO: Should be AnnouncementGeneralSection!
-		// https://127.0.0.1:4000/restapi/EntityREST/AnnouncementGeneralSection/17576
-		https://localhost:4000/#AnnouncementCase/24461/caseSections/24464/AnnouncementGeneralSection
-		var sectionid = 24464;
+	.controller('AnnouncementcaseCtrl', function($scope, Restapi, Settings, Formeditors, $routeParams) {
+
+		var sectionid = $routeParams.caseId;
 		$scope.announcementCase = new Restapi.DataModel({
 			id: sectionid,
 			module: 'AnnouncementGeneralSection'
 		});
-		$scope.announcementCase.fetch({success:function(){
-			$scope.displaySchemas
-		}});
+		$scope.announcementCase.fetch({
+			success: function() {
+				console.log('successfully fetched data model');
+				// $scope.announcementCase.fetched = new Date();
+			}
+		});
+
+		$scope.$watch('announcementCase.fetched', function() {
+			console.log('changed model, now re-render schema');
+			// $scope.fetchSchema();
+			// TODO: re-fetch schema
+			// TODO: re-render form
+		});
 
 		$scope.schemaModel = new Restapi.SchemaModel({
 			id: sectionid,
 			module: 'AnnouncementGeneralSection',
 			valueTwo: Settings.applicationName
 		})
-		$scope.schemaModel.fetch({
-			success: function() {
-				$scope.displaySchemas();
-			},
-			error: function(err) {
-				// Could not find schema, try with the default
-				$scope.schemaModel.valueTwo = 'default';
-				$scope.schemaModel.fetch({
-					success: function() {
-						$scope.displaySchemas();
-						// Found schema!
-					},
-					error: function(err) {
-						// Could not find schema, no more to try
-					}
-				});
-			}.bind(this)
-		});
+		$scope.fetchSchema = function() {
+			$scope.schemaModel.fetch({
+				success: function() {
+					$scope.displaySchemas();
+				},
+				error: function(err) {
+					// Could not find schema, try with the default
+					$scope.schemaModel.valueTwo = 'default';
+					$scope.schemaModel.fetch({
+						success: function() {
+							$scope.displaySchemas();
+							// Found schema!
+						},
+						error: function(err) {
+							// Could not find schema, no more to try
+						}
+					});
+				}.bind(this)
+			});
+		}
+
+		$scope.fetchSchema();
 
 		$scope.displaySchemas = function() {
-			$scope.$digest();
-
 			if ($scope.schemaModel && $scope.schemaModel.get('schemas')) {
 				var schemaModelJson = ($scope.schemaModel.toJSON()).schemas;
 
@@ -74,24 +82,24 @@ angular.module('ebs2020AngularApp')
 		}
 
 		function addContent(schema, schemaIndex) {
+			console.log('Add content');
 			if (schema.module) {
 				return;
 			}
 
 			var schemaJson = schema;
 
-			console.log('Displaying schema :', schemaJson.schema);
+			
 
 			var form = new Backbone.Form({
 				model: $scope.announcementCase,
 				schema: schemaJson.schema
 			});
 			form.render()
-			console.log('rendered form: ', form.el);
+			
 			$('#view-layout-main-region').append(form.el);
 
 			function submitForm() {
-				console.log('Submitting form...');
 				var errors = form.commit();
 				if (!errors) {
 					form.model.changedAttributes() && form.model.save();
