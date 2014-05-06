@@ -76,14 +76,14 @@
     <div>
         <ul class="nav">
             
-            <li class="active">
+            <li ng-repeat="section in sections" class="{active: $section.type=='AnnouncementGeneralSection'}">
 
             
-            <a data-target="/AnnouncementCase/17575/caseSections/17576/AnnouncementGeneralSection" data-section="AnnouncementGeneralSection" data-section-id="17576">Allmänna uppgifter</a>
+            <a data-target="/AnnouncementCase/17575/caseSections/17576/AnnouncementGeneralSection" data-section="AnnouncementGeneralSection" data-section-id="17576">{{section.uiTitle}}</a>
             
             </li>
             
-            <li>
+            <!-- <li>
 
             
             <a data-target="/AnnouncementCase/17575/caseSections/17580/AnnouncementTargetGroupSection" data-section="AnnouncementTargetGroupSection" data-section-id="17580">Målgrupp</a>
@@ -96,7 +96,7 @@
             <a data-target="/AnnouncementCase/17575/caseSections/17577/AnnouncementBudgetSection" data-section="AnnouncementBudgetSection" data-section-id="17577">Budget</a>
             
             </li>
-            
+             -->
         </ul>
 
     </div>

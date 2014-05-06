@@ -4,7 +4,11 @@ angular.module('ebs2020AngularApp')
 	.controller('AnnouncementcaseCtrl', function($scope, Restapi, Settings, Formeditors, $routeParams, $http) {
 		var sectionid = $routeParams.caseId;
 
-		$scope.errorRegister = function(){
+		$http.get('/restapi/EntityREST/menu/' + sectionid).success(function(response) {
+			$scope.sections = response
+		})
+
+		$scope.errorRegister = function() {
 			$http.post('/restapi/FlowEngineREST/INCORRECT_REGISTER/' + sectionid, {});
 		}
 		$scope.announcementCase = new Restapi.DataModel({
@@ -93,14 +97,14 @@ angular.module('ebs2020AngularApp')
 
 			var schemaJson = schema;
 
-			
+
 
 			var form = new Backbone.Form({
 				model: $scope.announcementCase,
 				schema: schemaJson.schema
 			});
 			form.render()
-			
+
 			$('#view-layout-main-region').append(form.el);
 
 			function submitForm() {
