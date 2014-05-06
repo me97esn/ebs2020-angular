@@ -4,7 +4,8 @@ angular.module('ebs2020AngularApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'btford.modal'
 ])
   .config(function ($routeProvider) {
     $routeProvider

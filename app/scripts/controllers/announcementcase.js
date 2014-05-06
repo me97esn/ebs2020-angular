@@ -1,9 +1,12 @@
 'use strict';
 
 angular.module('ebs2020AngularApp')
-	.controller('AnnouncementcaseCtrl', function($scope, Restapi, Settings, Formeditors, $routeParams) {
-
+	.controller('AnnouncementcaseCtrl', function($scope, Restapi, Settings, Formeditors, $routeParams, $http) {
 		var sectionid = $routeParams.caseId;
+
+		$scope.errorRegister = function(){
+			$http.post('/restapi/FlowEngineREST/INCORRECT_REGISTER/' + sectionid, {});
+		}
 		$scope.announcementCase = new Restapi.DataModel({
 			id: sectionid,
 			module: 'AnnouncementGeneralSection'
@@ -27,6 +30,7 @@ angular.module('ebs2020AngularApp')
 			module: 'AnnouncementGeneralSection',
 			valueTwo: Settings.applicationName
 		})
+
 		$scope.fetchSchema = function() {
 			$scope.schemaModel.fetch({
 				success: function() {
